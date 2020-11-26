@@ -3,7 +3,7 @@ using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Player;
 using UnityEngine;
 
-public class PlayerController : Entity, IMove, ITransform, IRigidBody , IShoot
+public class PlayerController : Entity, IMove, ITransform, IRigidBody , IShoot , ISpeed
 {
 
     private Transform transform;
@@ -47,5 +47,10 @@ public class PlayerController : Entity, IMove, ITransform, IRigidBody , IShoot
     public void shoot()
     {
         GameObject bulletGo = Instantiate(bulletPrefab, FireSpot.position, FireSpot.rotation);
+    }
+
+    public Speed GetSpeed()
+    {
+        return this.speed;
     }
 }
