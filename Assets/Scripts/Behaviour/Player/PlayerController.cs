@@ -1,12 +1,20 @@
 ﻿using Assets.Scripts.Base;
+using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Player;
 using UnityEngine;
 
-public class PlayerController : Entity, IMove, ITransform, IRigidBody
+public class PlayerController : Entity, IMove, ITransform, IRigidBody , IShoot
 {
 
     private Transform transform;
     private Rigidbody2D rigidbody2D;
+
+    
+
+    [SerializeField]
+    private Transform FireSpot;
+    [SerializeField]
+    private GameObject bulletPrefab;
 
     private void Start()
     {
@@ -34,5 +42,10 @@ public class PlayerController : Entity, IMove, ITransform, IRigidBody
     public Transform GetTransform()
     {
         return this.transform;
+    }
+
+    public void shoot()
+    {
+        GameObject bulletGo = Instantiate(bulletPrefab, FireSpot.position, FireSpot.rotation);
     }
 }
