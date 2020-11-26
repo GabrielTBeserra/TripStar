@@ -1,15 +1,14 @@
 ﻿using Assets.Scripts.Base;
-using Assets.Scripts.Interfaces;
 using Assets.Scripts.Interfaces.Player;
 using UnityEngine;
 
-public class PlayerController : Entity, IMove, ITransform, IRigidBody , IShoot , ISpeed
+public class PlayerController : Entity, IMove, ITransform, IRigidBody, IShoot, ISpeed
 {
 
     private Transform transform;
     private Rigidbody2D rigidbody2D;
 
-    
+
 
     [SerializeField]
     private Transform FireSpot;
@@ -25,7 +24,7 @@ public class PlayerController : Entity, IMove, ITransform, IRigidBody , IShoot ,
 
     void Update()
     {
-
+        CheckLimits();
     }
 
 
@@ -52,5 +51,31 @@ public class PlayerController : Entity, IMove, ITransform, IRigidBody , IShoot ,
     public Speed GetSpeed()
     {
         return this.speed;
+    }
+
+    public void CheckLimits()
+    {
+        if (transform.position.x > GameManager.rightLimit.x)
+        {
+            rigidbody2D.AddForce(new Vector2(-3, 0));
+            rigidbody2D.velocity = Vector2.zero;
+        }
+        else if (transform.position.x < GameManager.leftLimit.x)
+        {
+            rigidbody2D.AddForce(new Vector2(3, 0));
+            rigidbody2D.velocity = Vector2.zero;
+        }
+        else if (transform.position.y > GameManager.rightLimit.y)
+        {
+            rigidbody2D.AddForce(new Vector2(0, -3));
+            rigidbody2D.velocity = Vector2.zero;
+        }
+        else if (transform.position.y < GameManager.leftLimit.y)
+        {
+            rigidbody2D.AddForce(new Vector2(0, 3));
+            rigidbody2D.velocity = Vector2.zero;
+        }
+
+        rigidbody2D.rotation = 0;
     }
 }

@@ -10,7 +10,16 @@ public class BulletBehavior : MonoBehaviour
     void Start()
     {
         rgdb = GetComponent<Rigidbody2D>();
-        rgdb.AddRelativeForce(Vector2.up * 500);
+        
+
+        if (gameObject.CompareTag("EnemyBullet"))
+        {
+            rgdb.AddRelativeForce(Vector2.down * 500);
+        } else
+        {
+            rgdb.AddRelativeForce(Vector2.up * 500);
+        }
+
         Destroy(gameObject, 5.0f);
     }
 

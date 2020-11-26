@@ -13,7 +13,7 @@ public class InputController : MonoBehaviour
     public static int gameAsteroids = 0;
     private float lastSpawnedAmmoTime;
     private float timeAmmoCounter;
-    private double spawnAmmoInterval = 1;
+    private double spawnAmmoInterval = 0.2;
 
 
     private void Start()
