@@ -1,6 +1,4 @@
-﻿using Assets.Scripts.Base;
-using Assets.Scripts.Interfaces;
-using Assets.Scripts.Interfaces.Player;
+﻿using Assets.Scripts.Interfaces.Player;
 using UnityEngine;
 
 public class InputController : MonoBehaviour
@@ -26,17 +24,29 @@ public class InputController : MonoBehaviour
     private void Update()
     {
         timeAmmoCounter += Time.deltaTime;
-        float h = speed.GetSpeed().rotateSpeed * Input.GetAxisRaw("Horizontal");
-        float v = speed.GetSpeed().rotateSpeed * Input.GetAxisRaw("Vertical");
 
-        rigidBody.GetRigidBody2D().AddRelativeForce(Vector3.up * v * speed.GetSpeed().speed);
-        rigidBody.GetRigidBody2D().AddRelativeForce(Vector3.right * h * speed.GetSpeed().speed);
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            rigidBody.GetRigidBody2D().transform.position = touch.position;
+        }
+        else
+        {
+            float h = speed.GetSpeed().rotateSpeed * Input.GetAxisRaw("Horizontal");
+            float v = speed.GetSpeed().rotateSpeed * Input.GetAxisRaw("Vertical");
+
+            rigidBody.GetRigidBody2D().AddRelativeForce(Vector3.up * v * speed.GetSpeed().speed);
+            rigidBody.GetRigidBody2D().AddRelativeForce(Vector3.right * h * speed.GetSpeed().speed);
+        }
+
+
 
         if ((lastSpawnedAmmoTime + spawnAmmoInterval) < timeAmmoCounter)
         {
             timeAmmoCounter = 0;
             shoot.shoot();
         }
-        
+
     }
 }
