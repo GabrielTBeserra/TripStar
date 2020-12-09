@@ -15,4 +15,9 @@ public class AudioManager : MonoBehaviour
     {
         mixer.SetFloat("musicVol", value);
     }
+
+    public void SetSfxVolume(float value)
+    {
+        mixer.SetFloat("sfxVol", value);
+    }
 }

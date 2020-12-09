@@ -45,6 +45,7 @@ public class PlayerController : Entity, IMove, ITransform, IRigidBody, IShoot, I
 
     public void shoot()
     {
+        gameObject.GetComponent<SoundController>().PlayShoot();
         GameObject bulletGo = Instantiate(bulletPrefab, FireSpot.position, FireSpot.rotation);
     }
 
