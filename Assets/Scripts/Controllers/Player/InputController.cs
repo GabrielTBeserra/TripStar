@@ -6,6 +6,7 @@ public class InputController : MonoBehaviour
     private IRigidBody rigidBody;
     private ISpeed speed;
     private IShoot shoot;
+    private Camera cam;
 
     public static int gameEnemies = 0;
     public static int gameAsteroids = 0;
@@ -19,17 +20,18 @@ public class InputController : MonoBehaviour
         rigidBody = GameObject.FindGameObjectWithTag("Player").GetComponent<IRigidBody>();
         speed = GameObject.FindGameObjectWithTag("Player").GetComponent<ISpeed>();
         shoot = GameObject.FindGameObjectWithTag("Player").GetComponent<IShoot>();
+        cam = Camera.main;
     }
 
     private void Update()
     {
         timeAmmoCounter += Time.deltaTime;
 
-        if (Input.touchCount > 0)
+        if (Input.touchCount == 1)
         {
             Touch touch = Input.GetTouch(0);
 
-            rigidBody.GetRigidBody2D().transform.position = touch.position;
+            transform.position = (Vector2)cam.ScreenToWorldPoint(touch.position);
         }
         else
         {
