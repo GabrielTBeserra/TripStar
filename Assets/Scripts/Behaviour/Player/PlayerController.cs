@@ -18,7 +18,7 @@ public class PlayerController : Entity, IMove, ITransform, IRigidBody, IShoot, I
     private void Start()
     {
         speed = new Speed(2f, 2f);
-        life = new Life(10);
+        life = new Life(3);
         points = new Points(0);
         transform = GetComponent<Transform>();
         rigidbody2D = GetComponent<Rigidbody2D>();

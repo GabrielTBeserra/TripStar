@@ -6,7 +6,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text scoreText = null;
     [SerializeField] private GameObject lifeGameObject = null;
     [SerializeField] private Image lifebarFill = null;
-    [SerializeField] private int maxHealth = 50;
+    [SerializeField] private int maxHealth = 3;
 
 
     void OnEnable()
