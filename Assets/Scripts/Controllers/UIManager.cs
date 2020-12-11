@@ -31,7 +31,6 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealth(int health)
     {
-        print(health);
         lifebarFill.fillAmount = (float)health / maxHealth;
     }
 }
