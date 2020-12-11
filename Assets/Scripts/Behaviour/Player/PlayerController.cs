@@ -18,6 +18,8 @@ public class PlayerController : Entity, IMove, ITransform, IRigidBody, IShoot, I
     private void Start()
     {
         speed = new Speed(2f, 2f);
+        life = new Life(10);
+        points = new Points(0);
         transform = GetComponent<Transform>();
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
@@ -47,6 +49,7 @@ public class PlayerController : Entity, IMove, ITransform, IRigidBody, IShoot, I
     {
         gameObject.GetComponent<SoundController>().PlayShoot();
         GameObject bulletGo = Instantiate(bulletPrefab, FireSpot.position, FireSpot.rotation);
+        bulletGo.tag = "PlayerBullet";
     }
 
     public Speed GetSpeed()
@@ -78,5 +81,16 @@ public class PlayerController : Entity, IMove, ITransform, IRigidBody, IShoot, I
         }
 
         rigidbody2D.rotation = 0;
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("EnemyBullet"))
+        {
+            life.life--;
+            EventController.removeLife(life.life);
+        }
+
     }
 }

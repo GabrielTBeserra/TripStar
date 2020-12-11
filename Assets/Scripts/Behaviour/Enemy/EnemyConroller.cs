@@ -12,6 +12,7 @@ public class EnemyConroller : Entity, IMove, ITransform, IRigidBody, IShoot, ISp
     [SerializeField]
     public GameObject bullet;
 
+    private PlayerController player;
     private Rigidbody2D rigidbody2D;
     private Transform transform;
     private bool isFalling;
@@ -28,6 +29,7 @@ public class EnemyConroller : Entity, IMove, ITransform, IRigidBody, IShoot, ISp
         isFalling = false;
         transform = GetComponent<Transform>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     void Update()
@@ -111,5 +113,16 @@ public class EnemyConroller : Entity, IMove, ITransform, IRigidBody, IShoot, ISp
         asd.tag = "EnemyBullet";
     }
 
-   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("PlayerBullet"))
+        {
+            player.points.points++;
+            EventController.addPoints(player.points.points);
+            Destroy(gameObject);
+        }
+
+    }
+
+
 }

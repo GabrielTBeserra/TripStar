@@ -9,4 +9,6 @@ public class Entity : MonoBehaviour
     public Life life;
     [SerializeField]
     public Speed speed;
+    [SerializeField]
+    public Points points;
 }

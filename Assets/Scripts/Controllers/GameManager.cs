@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-
-        // Instantiate(enemy, new Vector2(Random.Range(leftLimit.x, rightLimit.x), rightLimit.y + 5), new Quaternion());
+        if(GameObject.FindGameObjectsWithTag("Enemy").Length < 5)
+        {
+            Instantiate(enemy, new Vector2(Random.Range(leftLimit.x, rightLimit.x), rightLimit.y + 5), new Quaternion());
+        }
     }
 }

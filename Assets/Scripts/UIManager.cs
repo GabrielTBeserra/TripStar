@@ -6,8 +6,23 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text scoreText = null;
     [SerializeField] private GameObject lifeGameObject = null;
     [SerializeField] private Image lifebarFill = null;
+    [SerializeField] private int maxHealth = 50;
 
-    [SerializeField] private int maxHealth = 3;
+
+    void OnEnable()
+    {
+        EventController.addPoints += UpdateScore;
+        EventController.removeLife += UpdateHealth;
+    }
+
+    void OnDisable()
+    {
+        EventController.addPoints -= UpdateScore;
+        EventController.removeLife -= UpdateHealth;
+    }
+
+
+
 
     public void UpdateScore(int score)
     {
@@ -16,6 +31,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealth(int health)
     {
+        print(health);
         lifebarFill.fillAmount = (float)health / maxHealth;
     }
 }
